@@ -252,7 +252,7 @@ export default function Contents() {
 
       <section className="gift">
         <h2 className="gift__title">삼진어묵 선물세트</h2>
-        
+        1
       </section>
     </>
   )
