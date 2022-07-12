@@ -24,7 +24,7 @@ export default function Header() {
             {
               liGnbs.map((liGnb) => {
                 return (
-                  <li key={liGnbs.id}>{liGnb.gnbname}</li>
+                  <li key={liGnb.id}>{liGnb.gnbname}</li>
                 )
               })
             }
@@ -40,7 +40,7 @@ export default function Header() {
             {
               liLnbs.map((liLnb) => {
                   return (
-                  <li key={liLnbs.id}>{liLnb.lnbname}</li>
+                  <li key={liLnb.id}>{liLnb.lnbname}</li>
                 )
               })
             }

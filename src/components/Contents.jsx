@@ -1,7 +1,24 @@
-import React from "react";
+import React,{useState}  from "react";
+import './Contents.css';
+import styled from "styled-components"
 import { FaHeart,FaShoppingCart } from "react-icons/fa";
 
 export default function Contents() {
+  const Button = styled.button`
+    width: 50%;
+    height: 54px;
+    border: none;
+    background: #f8f8f8;
+    color: #bbb;
+    transition: all 0.6s;
+    cursor: pointer;
+    &:hover {
+      background: #ccc;
+      color: #000;
+      font-weight: 700;
+    }
+  `
+
   const bestPs = [
     {
       id: 'best-01',
@@ -162,10 +179,14 @@ export default function Contents() {
 
   ]
 
+  const [count, setCount] = useState([0,0,0,0,0,0,0,0])
+  const [countR, setCountR] = useState([0,0,0,0,0,0,0,0])
+
   const giftPs = [
     {
       id: 'gift-01',
       alt: 'gift_img01',
+      image: '/images/gift_01.png',
       title: '1953세트 2호',
       sub: '인기고급제품으로 구성된 선물세트',
       price: '36,000원'
@@ -173,13 +194,58 @@ export default function Contents() {
     {
       id: 'gift-02',
       alt: 'gift_img02',
-      image: '/images/',
+      image: '/images/gift_02.png',
       title: '삼진프리미엄세트',
       sub: '삼진을 대표하는 프리미엄 어묵',
       price: '48,000원'
     },
 
   ]
+
+  const banners = [
+    {
+      id: 'sginIn',
+      image: '/images/sginIn.png',
+      alt: 'sginIn_img',
+      title: '회원가입시 마일리지 혜택',
+      sub: '신규 회원가입 시 2,000원 마일리지가 지급됩니다.'
+    },
+    {
+      id: 'service',
+      image: '/images/sginIn.png',
+      alt: 'service_img',
+      title: '3만원 이상 무료배송',
+      sub: '3만원 이상 무제한 무료배송 합니다.'
+    },
+    {
+      id: 'Amount',
+      image: '/images/sginIn.png',
+      alt: 'Amount_img',
+      title: '금액대별 회원 혜택',
+      sub: '구매 금액대별 혜택을 드리는 회원제도'
+    },
+  ]
+
+  const stores = [
+    {
+      id : 'store-01',
+      image : '/images/store.jpg',
+      alt : 'store_img',
+      badge : 'STORE',
+      title : '가까운 매장 찾기',
+      sub : '우리동네에서 가까운\n 삼진어묵 매장을 찾아보세요!'
+    },
+    {
+      id : 'store-02',
+      image : '/images/reservation.jpg',
+      alt : 'reservation_img',
+      badge : 'RESERVATION',
+      title : '체험 역사관 예약',
+      sub : '삼진어묵 역사관 방문과\n 어묵 만들기를 체험해보세요!'
+    },
+
+  ]
+
 
   return (
     <>
@@ -191,7 +257,7 @@ export default function Contents() {
         <h2 className="best__title">삼진어묵 베스트</h2>
         <div className="best_box">
           {
-            bestPs.map((bestP) => {
+            bestPs.map((bestP,i) => {
               return(
                   <div className="best" key={bestP.id}>
                     <img src={bestP.image} alt={bestP.alt} />
@@ -209,8 +275,12 @@ export default function Contents() {
                       </p>
                     </div>
                     <div className="best_btn">
-                      <button className="love"><FaHeart/>찜하기</button>
-                      <button className="cart"><FaShoppingCart/>장바구니</button>
+                      <Button onClick={() =>{
+                        let countCopy =[...count]
+                        countCopy[i] += 1
+                        setCount(countCopy)
+                      }}>🤍찜하기{count[i]}</Button>
+                      <Button >🛒장바구니</Button>
                     </div>
                   </div>
               )
@@ -223,7 +293,7 @@ export default function Contents() {
         <h2 className="rec__title">삼진어묵 추천상품</h2>
         <div className="rec_box">
           {
-            recPs.map((recP) => {
+            recPs.map((recP,i) => {
               return(
                 <div className="recommend" key={recP.id}>
                   <img src={recP.image} alt={recP.alt} />
@@ -240,8 +310,12 @@ export default function Contents() {
                       </p>
                   </div>
                   <div className="rec_btn">
-                    <button className="love"><FaHeart/>찜하기</button>
-                    <button className="cart"><FaShoppingCart/>장바구니</button>
+                    <Button onClick={() => {
+                      let countCopy = [...countR]
+                      countCopy[i] += 1
+                      setCountR(countCopy)
+                    }}>🤍찜하기{countR[i]}</Button>
+                    <Button>🛒장바구니</Button>
                   </div>
                 </div>
               )
@@ -250,10 +324,67 @@ export default function Contents() {
         </div>
       </section>
 
-      <section className="gift">
+      <section className="gift-container">
         <h2 className="gift__title">삼진어묵 선물세트</h2>
-        1
+        <div className="gift_box">
+          {
+            giftPs.map((giftP) => {
+              return (
+                <div className="gift_pro" key={giftP.id}>
+                  <img src={giftP.image} alt={giftP.alt} />
+                  <div className="txt">
+                    <p className="title">{giftP.title}</p>
+                    <p className="sub">{giftP.sub}</p>
+                    <p className="price">{giftP.price}</p>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
       </section>
+
+      <section className="banner-container">
+        <div className="banner_box">
+          {
+            banners.map((banner) => {
+              return (
+                <div className="banner" key={banner.id}>
+                  <img src={banner.image} alt={banner.alt} />
+                  <p className="title">{banner.title}</p>
+                  <p className="sub">{banner.sub}</p>
+                </div>
+              )
+            })
+          }
+        </div>
+      </section>
+
+      <section className="store-container">
+        <div className="store_box">
+          {
+            stores.map((store) => {
+              return(
+                <div className="store" key={store.id}>
+                  <div className="img_box"><img src={store.image} alt={store.alt} /></div>
+                  <div className="txt">
+                    <p className="badge">{store.badge}</p>
+                    <p className="title">{store.title}</p>
+                    <p className="sub">{store.sub}</p>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
+      </section>
+
+      <section className="insta-container">
+        <div className="insta__title">
+          <a href="#!">인스타그램 @samjinamook</a>
+        </div>
+      </section>
+
     </>
   )
 }
